@@ -34,7 +34,9 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
+  'get /users/:id/activation/:code' : 'UsersController.activate',
+
 
   /***************************************************************************
   *                                                                          *
