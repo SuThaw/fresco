@@ -41,7 +41,27 @@ module.exports = {
 	 		  
              return res.jsonp(order);
            });
+		
 
-	}	
+	},
+	'activate' : function(req,res,next){
+			Orders.findOne(req.param('id'),function foundOrder(err,order){
+				if(err) return next(err);
+				if(order){
+					if(order.orderCode == req.param('orderCode')){
+						Orders.update({id:req.param('id')},{status:1}).exec(function(err,updated){
+										if(err) return next(err);
+										return res.jsonp(updated);
+						});
+					}else{
+						var missCode = {name:'Miss Code',message:'Your Code is miss match'};
+						return res.jsonp(missCode);
+					}
+				}else{
+					var noOrder = {name:'No Order',message:'Your Id is not an order Id'};
+					return res.jsonp(noOrder);
+				}
+			});
+		}	
 };
 
