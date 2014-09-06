@@ -35,7 +35,7 @@ module.exports = {
     },
     status:{
       type:'int',
-      defaultsTo:0
+      defaultsTo:1
     },
     activation_code:{
       type:'string'
@@ -43,6 +43,12 @@ module.exports = {
     password_reset_code:{
       type:'string'
     },
+
+    orders:{
+      collection:'orders',
+      via:'userId'
+    },
+
    
 
   },
