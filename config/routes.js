@@ -38,6 +38,9 @@ module.exports.routes = {
   'get /users/:id/activation/:code' : 'UsersController.activate',
   'post /users/signin' : 'UsersController.signin',
   'post /orders/:id/activation' : 'OrdersController.activate',
+  'get /orders/map/:township' : 'OrdersControllers.map'
+
+  
   
 
 

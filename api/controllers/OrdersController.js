@@ -62,6 +62,17 @@ module.exports = {
 					return res.jsonp(noOrder);
 				}
 			});
+		},
+		'map':function(req,res,next){
+			var tow = req.params.all();	
+			Orders.find({where:{township:tow['id']}}).exec(function findCB(err,found){
+				var loc = {dagon:{lat:'16.783804',lng:'96.156401' },mayangone:{lat:'16.867632',lng:'96.142523'},pannhlaing: {lat:'16.798837', lng:'96.123856'},kamayut :{lat:'16.823889', lng:'96.133981'},yankin:{lat: '16.834770', lng:'96.165932'}};
+				
+				//console.log(loc[tow['id']]);
+				//console.log(found);
+				return res.view('order',{orders:found,location:loc[tow['id']]});
+            });
+			
 		}	
 };
 

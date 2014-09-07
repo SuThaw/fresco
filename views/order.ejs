@@ -1,0 +1,55 @@
+<script>
+    var map;
+    $(document).ready(function(){
+    	var lat = $('#lat').val();
+    	var lng = $('#lnt').val();
+
+    	var total_lat = $('#total_lat').val().split(',');
+    	var total_lng = $('#total_lng').val().split(',');
+    	//console.log(total_lat.length);
+    	
+    	//console.log(total_lat);
+    	//console.log(lat);
+       var map = new GMaps({
+        el: '#map',
+        lat: lat,
+        lng: lng,
+        zoom:14,
+        zoomControl : true,
+        zoomControlOpt: {
+            style : 'SMALL',
+            position: 'TOP_LEFT'
+        },
+        panControl : false,
+        streetViewControl : false,
+        mapTypeControl: false,
+        overviewMapControl: false
+      });
+
+       for(var i=0;i<total_lat.length-1;i++){
+       		 var latitude = total_lat[i];
+        var longitude = total_lng[i];
+
+        map.addMarker({
+          lat: latitude,
+          lng: longitude,
+          title: 'Marker #' + i
+        });
+       }
+   
+   
+     //   map.addMarker({
+     //        lat: $('#lat').val(),
+     //        lng: $('#lnt').val(),
+  			// title: 'Lima',
+  			//  icon: "/images/map.png"
+  			// });
+
+});
+
+    </script>
+   <input type="hidden" id="total_lat" name="total_lat" value="<% _.each(orders,function(order){ %><%= order.addressLat %>,<% }) %>">
+    <input type="hidden" id="total_lng" name="total_lng" value="<% _.each(orders,function(order){ %><%= order.addressLng %>,<% }) %>">
+<input type="hidden" value ="<%=location['lat']%>" name="lat" id="lat">
+<input type="hidden" value ="<%=location['lng']%>" name="lng" id="lnt">
+<div id = "map" style="height:100vh"></div>
